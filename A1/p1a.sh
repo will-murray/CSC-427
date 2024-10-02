@@ -1,1 +1,1 @@
-curl https://hgdownload.cse.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.fa.gz | gzip > saccer3.fa.gz
+curl https://hgdownload.cse.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.fa.gz | gzip -d > saccer3.fa
