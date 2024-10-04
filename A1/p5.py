@@ -1,6 +1,7 @@
 import sys
 import re
 
+
 assert(len(sys.argv) == 4)
 tokens = re.findall(r'\d+[a-zA-Z]+', sys.argv[3])
 s1, s2 = sys.argv[1], sys.argv[2]

@@ -1,1 +1,1 @@
-grep ">" saccer3.fa | wc -l
+grep ">" sacCer3.fa | wc -l
