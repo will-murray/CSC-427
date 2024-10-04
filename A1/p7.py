@@ -22,6 +22,26 @@ class Anchors:
     def remove_min_anchor(self):
         self.L = self.L[1:]
 
+    def remove_overlapping_anchors(self):
+        L_tup = set([tuple(l) for l in self.L]) #convert to list of tuples
+        S_tup = set([tuple(s) for s in self.overlapping()])
+        #print(f"{L_tup} - {S_tup} = {L_tup.difference(S_tup)}" )
+        new_L =  [list(tup) for tup in L_tup.difference(S_tup)]
+        new_L = sorted(new_L, key = lambda x : min(x[0], x[2]))
+        self.L = new_L
+
+    
+
+
+def in_memo(A):
+    key = tuple(tuple(a) for a in A.L)
+    return key in memo.keys()
+        
+def remember_this(A, value):
+    memo.update({tuple(tuple(a) for a in A.L) : value})
+
+def fetch_from_memo(A):
+    return memo.pop(tuple(tuple(a) for a in A.L))
 #given an Anchor object, return the optimal alignment
 #This function returns a list containning two elements
 #
@@ -31,36 +51,63 @@ class Anchors:
 
 def OPT(A):
 
-    #empty list containing the anchors to choose
-    
+    #check the memo
+    if in_memo(A):
+        return fetch_from_memo(A)
 
     #Base Case: Only 1 anchor
     if(len(A.L) == 1):
         print(f"BASE CASE, returning = [{A.L[0]}, {A.span(0)}] ")
         return [[ A.L[0] ], A.span(0)]
 
+    
+
+    
+
     #find the set of anchors which overlap the leftmost anchor
     S = A.overlapping()
 
-    A_next = copy.deepcopy(A)
-
     #Case 2: the leftmost anchor doesn't overlap with any other anchors
     if(len(S) == 0):
+        A_next = copy.deepcopy(A)
         A_next.remove_min_anchor()
         anchors, coverage = OPT(A_next)
-        print(f"anchors = {anchors}, coverage = {coverage}")
-        print(f"A.L[0] = {A.L[0]}" )
+        remember_this(A_next, [anchors, coverage])
         return [ [A.L[0]] + anchors, A.span(0) + coverage ]
         
+    #Case 3: the leftmost anchor overlaps with 1 or more anchors
+    A1, A2 = copy.deepcopy(A), copy.deepcopy(A)
 
+    
+    # 3.1 Compute the OPT with the leftmost anchor, excluding anchors it overlaps with
+    A1.remove_overlapping_anchors()
+    ancs1, cov1 = OPT(A1)
 
+    # 3.2 Compute the OPT without the leftmost anchor
+    A2.remove_min_anchor()
+    ancs2, cov2 = OPT(A2)
+    
+    # return the option with higher coverage
+    if cov1 > cov2:
+        remember_this(A1, [ancs1, cov1])
+        return [ancs1, cov1]
+
+    remember_this(A2, [ancs2, cov2])
+    return [ancs2, cov2]
 
 input = sys.argv[1]
 
 A = Anchors(input)
-
-print(OPT(A))
-
+memo = {}
 
 
+ancs, coverage = OPT(A)
+for a in ancs:
+    print(f"({a[0]}, {a[1]}) -> ({a[2]}, {a[3]})")
+print(f"Coverage: {coverage}")
+
+print("MEMO:")
+
+for m in memo:
+    print(m)
 
