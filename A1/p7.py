@@ -1,3 +1,5 @@
+import random
+import matplotlib.pyplot as plt
 import sys
 import copy
 
@@ -7,8 +9,10 @@ def I(A, B):
     
 class Anchors:
     def __init__(self, input):
-         self.L = [list(map(int,i.split(','))) for i in input.split(';')]
-         self.L = sorted(self.L, key = lambda x : min(x[0], x[2]))
+        self.L = [list(map(int,i.split(','))) for i in input.split(';')]
+        self.L = sorted(self.L, key = lambda x : min(x[0], x[2]))
+        self.msg = "hello"
+
 
     def overlapping(self):
         min_a,min_b = self.L[0][:2], self.L[0][2:]
@@ -30,9 +34,6 @@ class Anchors:
         new_L = sorted(new_L, key = lambda x : min(x[0], x[2]))
         self.L = new_L
 
-    
-
-
 def in_memo(A):
     key = tuple(tuple(a) for a in A.L)
     return key in memo.keys()
@@ -42,12 +43,12 @@ def remember_this(A, value):
 
 def fetch_from_memo(A):
     return memo.pop(tuple(tuple(a) for a in A.L))
-#given an Anchor object, return the optimal alignment
-#This function returns a list containning two elements
+
+# given an Anchor object, return the optimal alignment
+# This function returns a list containning two elements
 #
 #       1) A list of anchors
 #       2) the coverage of the anchors
-#
 
 def OPT(A):
 
@@ -57,11 +58,7 @@ def OPT(A):
 
     #Base Case: Only 1 anchor
     if(len(A.L) == 1):
-        print(f"BASE CASE, returning = [{A.L[0]}, {A.span(0)}] ")
         return [[ A.L[0] ], A.span(0)]
-
-    
-
     
 
     #find the set of anchors which overlap the leftmost anchor
@@ -95,19 +92,22 @@ def OPT(A):
     remember_this(A2, [ancs2, cov2])
     return [ancs2, cov2]
 
+
+
+# MAIN 
+
 input = sys.argv[1]
 
-A = Anchors(input)
-memo = {}
 
+A = Anchors(input)
+
+memo = {}
 
 ancs, coverage = OPT(A)
 for a in ancs:
     print(f"({a[0]}, {a[1]}) -> ({a[2]}, {a[3]})")
-print(f"Coverage: {coverage}")
+print(coverage)
 
-print("MEMO:")
 
-for m in memo:
-    print(m)
+
 

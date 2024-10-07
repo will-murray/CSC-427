@@ -1,1 +1,1 @@
-grep -B 1 "CGCGCGCGCG" output.fa | grep "^>" | sed 's/^>//' | sort -u 
+awk '/CGCGCGCGCG/{print prev} {prev=$0}' sacCer3.flat.fa

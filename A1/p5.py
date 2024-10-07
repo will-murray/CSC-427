@@ -46,6 +46,18 @@ for toke in tokens:
         seq1 += "-"*N 
         s2 = s2[N:]
 
+    elif action == "X":
+        mid += "*"*N
+        seq1 += s1[0:N]
+        seq2 += s2[0:N]
+
+
+    elif action == "=":
+        mid += "="*N
+        seq1 += s1[0:N]
+        seq2 += s2[0:N]
+
+
     
 
     seq1 += " "
