@@ -1,0 +1,15 @@
+[bwa_index] Pack FASTA... 0.40 sec
+[bwa_index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=102609132, availableWord=19219828
+[BWTIncConstructFromPacked] 10 iterations done. 31703404 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 58568012 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 82441292 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 102609132 characters processed.
+[bwt_gen] Finished constructing BWT in 40 iterations.
+[bwa_index] 26.22 seconds elapse.
+[bwa_index] Update BWT... 0.26 sec
+[bwa_index] Pack forward-only FASTA... 0.23 sec
+[bwa_index] Construct SA from BWT and Occ... 12.22 sec
+[main] Version: 0.7.18-r1243-dirty
+[main] CMD: bwa index genome.fa
+[main] Real time: 39.403 sec; CPU: 39.330 sec

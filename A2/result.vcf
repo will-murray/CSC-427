@@ -24,9 +24,9 @@
 ##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
 ##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
 ##bcftools_callVersion=1.19+htslib-1.19
-##bcftools_callCommand=call -mv -Ob; Date=Mon Nov  4 22:48:25 2024
+##bcftools_callCommand=call -mv -Ob; Date=Tue Nov 12 00:08:24 2024
 ##bcftools_filterVersion=1.19+htslib-1.19
-##bcftools_filterCommand=filter -i 'QUAL>=20 && INFO/DP>=20' -o result.vcf -O v; Date=Mon Nov  4 22:48:25 2024
+##bcftools_filterCommand=filter -i 'QUAL>=20 && INFO/DP>=20' -o result.vcf -O v; Date=Tue Nov 12 00:08:24 2024
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	genome.fa.sorted.bam
 chr22	16189053	.	G	A	192.85	PASS	DP=20;VDB=0.00151662;SGB=-0.616816;RPBZ=-1.41262;MQBZ=0;MQSBZ=0;BQBZ=1.24264;SCBZ=1.27881;MQ0F=0;AC=1;AN=2;DP4=8,5,5,1;MQ=59	GT:PL	0/1:226,0,255
 chr22	16415742	.	A	C	217.488	PASS	DP=20;VDB=8.46349e-09;SGB=-0.691153;RPBZ=2.28155;MQBZ=0;BQBZ=1.52145;SCBZ=0;MQ0F=0;AC=1;AN=2;DP4=2,0,18,0;MQ=60	GT:PL	0/1:255,0,36

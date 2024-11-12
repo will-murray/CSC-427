@@ -1,0 +1,20 @@
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 55632 sequences (4228032 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (19, 24436, 8, 0)
+[M::mem_pestat] analyzing insert size distribution for orientation FF...
+[M::mem_pestat] (25, 50, 75) percentile: (390, 574, 3098)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 8514)
+[M::mem_pestat] mean and std.dev: (1574.94, 1880.83)
+[M::mem_pestat] low and high boundaries for proper pairs: (1, 11222)
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (163, 177, 195)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (99, 259)
+[M::mem_pestat] mean and std.dev: (172.27, 18.62)
+[M::mem_pestat] low and high boundaries for proper pairs: (67, 291)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_pestat] skip orientation FF
+[M::mem_process_seqs] Processed 55632 reads in 3.881 CPU sec, 3.882 real sec
+[main] Version: 0.7.18-r1243-dirty
+[main] CMD: bwa mem /home/williammurray/CSC-427/A2/genome.fa /home/williammurray/CSC-427/A2/ENCSR000COQ1_1.fastq.gz /home/williammurray/CSC-427/A2/ENCSR000COQ1_2.fastq.gz
+[main] Real time: 4.121 sec; CPU: 4.103 sec
