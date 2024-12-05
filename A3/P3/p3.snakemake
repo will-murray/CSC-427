@@ -1,0 +1,68 @@
+rule all:
+    input:
+        result = "ENCSR000COQ1.vcf"
+
+
+rule index_genome:
+    # Rule to index the genome with bwa
+    input:
+        ref="genome.fa"
+    output:
+        idx = "genome.fa.bwt"
+        
+    shell:
+        """
+        bwa index {input.ref}
+        """
+
+rule align_reads:
+    input:
+        idx = "genome.fa.bwt",
+        ref = "genome.fa",
+        r1 = "ENCSR000COQ1_1.fastq.gz",
+        r2 = "ENCSR000COQ1_2.fastq.gz"
+    
+    output:
+        alignment ="genome.fa.bam"
+
+    shell:
+        """
+        bwa mem -t 2 {input.ref} {input.r1} {input.r2} > {input.ref}.bam
+        """
+
+rule sort_alignment:
+    input:
+        alignment = "genome.fa.bam"
+    output:
+        sorted_alignment = "genome.fa.sorted.bam"
+    
+    shell:
+        """
+        samtools sort {input.alignment} -o {output.sorted_alignment}
+        """
+
+rule call_variants_and_cleanup:
+    input:
+        ref = "genome.fa",
+        sorted_alignment = "genome.fa.sorted.bam"
+    
+    output:
+        result = "ENCSR000COQ1.vcf"
+
+    shell:
+        """
+        bcftools mpileup -f {input.ref} {input.sorted_alignment} | \
+        bcftools call -mv -Ob | \
+        bcftools filter -i 'QUAL>=20 && INFO/DP>=20' -o {output.result} -O v
+
+        mkdir temp
+        mv genome.fa.amb temp
+        mv genome.fa.ann temp
+        mv genome.fa.bam temp
+        mv genome.fa.bwt temp
+        mv genome.fa.pac temp
+        mv genome.fa.sa temp
+        mv genome.fa.sorted.bam temp
+        mv genome.fa.fai temp
+        """
+        # rm 'genome.fa'?* 
