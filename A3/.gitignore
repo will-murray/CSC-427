@@ -1,13 +1,11 @@
-P1/overlap.fa
-P1/overlap.png
-
-P2/debruijn.png
-P2/test.fa
-
-P3/ENCSR000COQ1_1.fastq.gz
-P3/ENCSR000COQ1_2.fastq.gz
-P3/ENCSR000COQ2_1.fastq.gz
-P3/ENCSR000COQ2_2.fastq.gz
-P3/genome.fa
-P3/temp/
+A3/P1/overlap.fa
+A3/P1/overlap.png
+A3/P2/debruijn.png
+A3/P2/test.fa
+A3/P3/ENCSR000COQ1_1.fastq.gz
+A3/P3/ENCSR000COQ1_2.fastq.gz
+A3/P3/ENCSR000COQ2_1.fastq.gz
+A3/P3/ENCSR000COQ2_2.fastq.gz
+A3/P3/genome.fa
+A3/P3/temp/
 
